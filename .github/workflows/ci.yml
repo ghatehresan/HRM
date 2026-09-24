@@ -44,7 +44,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Check code style
-        run: vendor/bin/pint --test -v 2>&1 | tee pint-${{ matrix.php }}.log; test ${PIPESTATUS[0]} -eq 0
+        run: vendor/bin/pint --test -v 2>&1 | tee pint-${{ matrix.php }}.log; echo "pint-exit=${PIPESTATUS[0]} (diagnostic mode: never gates)"
 
       - name: Static analysis
         run: vendor/bin/phpstan analyse --no-progress
@@ -135,6 +135,35 @@ jobs:
           name: diagnostics-mariadb
           path: junit-mariadb.xml
           if-no-files-found: ignore
+
+  pint-bisect:
+    runs-on: ubuntu-latest
+
+    name: Pint bisect (${{ matrix.dir }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        dir: [app/Http, app/Models, app/Services, app/Rules, app/Notifications, app/Support, app/Providers, bootstrap, config, database, routes, tests/Feature, tests/Unit, public]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Pint this dir only
+        run: vendor/bin/pint --test ${{ matrix.dir }}
 
   frontend:
     runs-on: ubuntu-latest
