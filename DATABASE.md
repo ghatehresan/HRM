@@ -1,6 +1,10 @@
 # DATABASE — قرارداد پایگاه داده HRM
 
-**Milestone 1** · موتور: MySQL 8.0 / MariaDB 10.6+ · Collation: `utf8mb4_persian_ci`
+**Milestone 2** · موتور: MySQL 8.0 / MariaDB 10.6+ · Collation: `utf8mb4_persian_ci`
+> وضعیت M2: §۳ (Identity) پیاده‌سازی شد — مایگریشن‌های `2026_09_24_000001` تا `2026_09_24_000008`.
+> تنها انحراف از قرارداد M1 دو ستون قفل پلکانی در §۳.۱ است (ثبت‌شده در همان بخش).
+> توجه: CI روی MariaDB 10.6 سبز می‌شود (موتور واقعی XAMPP و استقرار هدف).
+> سازگاری Oracle MySQL 8.0 با همین collation **راستی‌آزمایی نشده**؛ در صورت استقرار روی Oracle MySQL، مقدار `DB_COLLATION` را حتماً در staging بیازمایید.
 این سند **قرارداد** است: Milestoneهای ۲ تا ۱۲ دقیقاً همین Schema را پیاده می‌کنند.
 هر انحرافی نیازمند به‌روزرسانی این سند + migration جدید است (هرگز ویرایش migration اجراشده).
 
@@ -96,6 +100,8 @@ audit_logs ── (morph به همه، بدون FK)      notifications ── (m
 | `last_login_at` | `DATETIME NULL` | آخرین ورود موفق (UTC) |
 | `password_changed_at` | `DATETIME NULL` | برای سیاست انقضای رمز |
 | `mfa_enforced` | `BOOLEAN DEFAULT FALSE` | الزام MFA برای این کاربر |
+| `failed_login_attempts` | `INT DEFAULT 0` | شمارندهٔ قفل پلکانی ورود (افزودهٔ M2) |
+| `locked_until` | `DATETIME NULL` | پایان قفل موقت، UTC (افزودهٔ M2) |
 
 ### ۳.۲ roles
 

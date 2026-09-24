@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Support\Jalali;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Route;
+use LogicException;
 use Tests\TestCase;
 
 final class AuditLogTest extends TestCase
@@ -56,7 +57,7 @@ final class AuditLogTest extends TestCase
         try {
             $log->delete();
             $this->fail('AuditLog::delete() must throw.');
-        } catch (\LogicException $e) {
+        } catch (LogicException $e) {
             $this->assertStringContainsString('append-only', $e->getMessage());
         }
 

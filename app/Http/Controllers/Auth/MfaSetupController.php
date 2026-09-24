@@ -9,6 +9,7 @@ use App\Services\AuthService;
 use App\Services\MfaService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Throwable;
 
 class MfaSetupController extends Controller
 {
@@ -41,7 +42,7 @@ class MfaSetupController extends Controller
 
         try {
             $secret = decrypt($encrypted);
-        } catch (\Throwable) {
+        } catch (Throwable) {
             $secret = null;
         }
 

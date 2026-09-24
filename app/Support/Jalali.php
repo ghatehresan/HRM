@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\Support;
 
+use DateTimeImmutable;
+use DateTimeInterface;
+use DateTimeZone;
+
 /**
  * Jalali (Shamsi) calendar conversions.
  *
@@ -145,13 +149,13 @@ final class Jalali
      * (mail, audit UI, exports). Accepts unix timestamps, UTC datetime
      * strings, or DateTimeInterface instances.
      *
-     * @param  string|int|\DateTimeInterface  $value
+     * @param  string|int|DateTimeInterface  $value
      * @param  string  $timezone  e.g. 'Asia/Tehran'
      * @param  string  $format  short|long|month|full
      */
-    public static function formatInTimezone(string|int|\DateTimeInterface $value, string $timezone, string $format = 'short'): string
+    public static function formatInTimezone(string|int|DateTimeInterface $value, string $timezone, string $format = 'short'): string
     {
-        if ($value instanceof \DateTimeInterface) {
+        if ($value instanceof DateTimeInterface) {
             $timestamp = $value->getTimestamp();
         } elseif (is_int($value)) {
             $timestamp = $value;
@@ -169,7 +173,7 @@ final class Jalali
             return '—';
         }
 
-        $wall = (new \DateTimeImmutable('@'.$timestamp))->setTimezone(new \DateTimeZone($timezone));
+        $wall = (new DateTimeImmutable('@'.$timestamp))->setTimezone(new DateTimeZone($timezone));
 
         return self::format($wall->format('Y-m-d H:i:s'), $format);
     }

@@ -9,6 +9,7 @@ use App\Models\Role;
 use Database\Seeders\DevAdminSeeder;
 use Database\Seeders\PermissionSeeder;
 use Database\Seeders\RoleSeeder;
+use RuntimeException;
 use Tests\TestCase;
 
 final class SeedersTest extends TestCase
@@ -28,7 +29,7 @@ final class SeedersTest extends TestCase
     public function test_dev_seeder_refuses_non_local_environments(): void
     {
         // PHPUnit runs with APP_ENV=testing, so this must throw.
-        $this->expectException(\RuntimeException::class);
+        $this->expectException(RuntimeException::class);
         $this->seed(DevAdminSeeder::class);
     }
 }

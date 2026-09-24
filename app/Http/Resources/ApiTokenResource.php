@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use DateTimeInterface;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Laravel\Sanctum\PersonalAccessToken;
@@ -26,6 +27,6 @@ class ApiTokenResource extends JsonResource
 
     private function iso(mixed $value): ?string
     {
-        return $value instanceof \DateTimeInterface ? $value->format('c') : null;
+        return $value instanceof DateTimeInterface ? $value->format('c') : null;
     }
 }

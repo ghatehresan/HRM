@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
             }
 
             return back()->withErrors([
-                'email' => 'حساب شما به دلیل تلاش‌های ناموفق قفل شده است. حدود '.PersianNumbers::toFa((string) $minutes).' دقیقهٔ دیگر تلاش کنید.',
+                'email' => 'حساب شما به دلیل تلاش‌های ناموفق قفل شده است. حدود'.PersianNumbers::toFa((string) $minutes).' دقیقهٔ دیگر تلاش کنید.',
             ])->onlyInput('email');
         }
 

@@ -44,7 +44,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Check code style
-        run: vendor/bin/pint --test
+        run: vendor/bin/pint --test -v 2>&1 | tee pint-${{ matrix.php }}.log; test ${PIPESTATUS[0]} -eq 0
 
       - name: Static analysis
         run: vendor/bin/phpstan analyse --no-progress
@@ -53,29 +53,40 @@ jobs:
       # DST-immune (see Jalali::monthRange). Unit tests honor TZ;
       # feature tests boot Laravel (UTC) either way.
       - name: Execute tests (UTC)
-        run: TZ=UTC php artisan test
+        run: TZ=UTC php artisan test --log-junit=junit-utc-${{ matrix.php }}.xml
 
       - name: Execute tests (Asia/Tehran)
-        run: TZ=Asia/Tehran php artisan test
+        run: TZ=Asia/Tehran php artisan test --log-junit=junit-tehran-${{ matrix.php }}.xml
 
       - name: Audit dependencies
         run: composer audit
 
-  test-mysql:
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostics-php-${{ matrix.php }}
+          path: |
+            pint-${{ matrix.php }}.log
+            junit-utc-${{ matrix.php }}.xml
+            junit-tehran-${{ matrix.php }}.xml
+          if-no-files-found: ignore
+
+  test-mariadb:
     runs-on: ubuntu-latest
 
-    name: Tests on MySQL 8
+    name: Tests on MariaDB 10.6
 
     services:
-      mysql:
-        image: mysql:8.0
+      mariadb:
+        image: mariadb:10.6
         env:
           MYSQL_ROOT_PASSWORD: hrm_secret
           MYSQL_DATABASE: hrm_test
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h localhost -uroot -phrm_secret"
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -103,10 +114,11 @@ jobs:
         run: php artisan key:generate
 
       # Real environment variables take precedence over phpunit.xml <env>,
-      # so this leg runs the SAME suite against MySQL 8 (production engine,
-      # utf8mb4_persian_ci collation). One timezone leg is enough here —
-      # DST-immunity is covered by the sqlite matrix above.
-      - name: Execute tests (MySQL 8)
+      # so this leg runs the SAME suite against MariaDB 10.6 (the XAMPP /
+      # deployment engine, utf8mb4_persian_ci collation). One timezone leg
+      # is enough here — DST-immunity is covered by the sqlite matrix.
+      # Oracle MySQL 8.0 compatibility is UNVERIFIED (see DATABASE.md).
+      - name: Execute tests (MariaDB 10.6)
         env:
           DB_CONNECTION: mysql
           DB_HOST: 127.0.0.1
@@ -114,7 +126,15 @@ jobs:
           DB_DATABASE: hrm_test
           DB_USERNAME: root
           DB_PASSWORD: hrm_secret
-        run: TZ=UTC php artisan test
+        run: TZ=UTC php artisan test --log-junit=junit-mariadb.xml
+
+      - name: Upload failure diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostics-mariadb
+          path: junit-mariadb.xml
+          if-no-files-found: ignore
 
   frontend:
     runs-on: ubuntu-latest

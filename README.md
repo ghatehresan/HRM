@@ -3,9 +3,9 @@
 سیستم جامع مدیریت منابع انسانی مجموعهٔ قطعه‌رسان؛ فارسی، راست‌به‌چپ،
 Production-ready و یکپارچه با اکوسیستم موجود (برند، سامانهٔ مدیریت، وب‌سایت).
 
-> **وضعیت: Milestone 1 — بنیان (Foundation)**
-> معماری، Design System، تقویم شمسی و اسکافولد امن آماده است.
-> احراز هویت و ماژول‌های HR از Milestone 2 آغاز می‌شوند.
+> **وضعیت: Milestone 2 — احراز هویت و مجوز (Identity)**
+> ورود/خروج، قفل پلکانی، MFA اجباری/اختیاری، RBAC کامل، پنل ادمین کاربران/نقش‌ها
+> و Audit Log فقط‌افزودنی آماده است. ماژول‌های HR از Milestone 3 آغاز می‌شوند.
 
 ## Stack
 
@@ -16,7 +16,7 @@ Production-ready و یکپارچه با اکوسیستم موجود (برند، 
 | Frontend | Blade + Alpine.js + Tailwind CSS v4 (Vite) |
 | Auth | Session/Cookie + MFA (TOTP) + Sanctum tokens |
 | Queue / Cache / Session | درایور `database` (بدون Redis — رجوع به `AUDIT.md` §۲۲٫۵) |
-| Test | PHPUnit 12 · Pint · PHPStan · Playwright (از M2) |
+| Test | PHPUnit 12 · Pint · PHPStan · Playwright (از M3) |
 | CI | GitHub Actions (PHP 8.3/8.4 + Node 22) |
 
 ## شروع سریع (XAMPP روی ویندوز)
@@ -64,8 +64,10 @@ php artisan serve   # → http://localhost:8000
 | [`BRAND.md`](BRAND.md) | نگاشت توکن‌های برند به Design System |
 | [`TESTING.md`](TESTING.md) | استراتژی تست + ماتریس تست‌های دسترسی |
 | [`AGENTS.md`](AGENTS.md) | راهنمای ایجنت‌ها و توسعه‌دهندگان جدید |
+| [`AUTHENTICATION.md`](AUTHENTICATION.md) | ورود، رمز، MFA، نشست، توکن API |
+| [`AUTHORIZATION.md`](AUTHORIZATION.md) | نقش‌ها، مجوزها، Policyها، پنل ادمین |
 
-اسناد `API.md` · `AUTHENTICATION.md` · `AUTHORIZATION.md` · `INTEGRATION.md` ·
+اسناد `API.md` · `INTEGRATION.md` ·
 `DEPLOYMENT.md` · `BACKUP.md` در Milestoneهای بعدی (هم‌زمان با پیاده‌سازی) افزوده می‌شوند.
 
 ## Milestoneها
@@ -73,8 +75,8 @@ php artisan serve   # → http://localhost:8000
 | # | Milestone | وضعیت |
 |---|---|---|
 | M0 | Repository Audit | ✅ کامل (`AUDIT.md`) |
-| M1 | Architecture & Design System | ✅ کامل (این نسخه) |
-| M2 | Authentication + Authorization | ⬜ بعدی |
+| M1 | Architecture & Design System | ✅ کامل |
+| M2 | Authentication + Authorization | ✅ کامل (این نسخه) |
 | M3–M12 | Organization → Integrations | ⬜ طبق نقشهٔ راه `AUDIT.md` §۲۱ |
 
 ## قوانین طلایی (خلاصه)

@@ -36,6 +36,7 @@ class PasswordResetLinkController extends Controller
 
         // Identical response either way: password-reset must not reveal
         // whether an email is registered (SECURITY.md §2).
+
         return back()->with('status', 'اگر حسابی با این ایمیل وجود داشته باشد، پیوند بازیابی ارسال شد.');
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit;
 
 use App\Support\Jalali;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 final class JalaliTimezoneTest extends TestCase
@@ -31,7 +32,7 @@ final class JalaliTimezoneTest extends TestCase
     {
         $this->assertSame(
             '۲ مهر ۱۴۰۵',
-            Jalali::formatInTimezone(new \DateTimeImmutable('2026-09-24 20:00:00+00:00'), 'Asia/Tehran', 'long')
+            Jalali::formatInTimezone(new DateTimeImmutable('2026-09-24 20:00:00+00:00'), 'Asia/Tehran', 'long')
         );
 
         $this->assertSame(

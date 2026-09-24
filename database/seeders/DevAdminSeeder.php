@@ -8,6 +8,7 @@ use Faker\Factory as FakerFactory;
 use Illuminate\Console\Command;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use RuntimeException;
 
 /**
  * LOCAL-ONLY demo accounts (fake data). Refuses to run outside the
@@ -18,7 +19,7 @@ class DevAdminSeeder extends Seeder
     public function run(): void
     {
         if (! app()->isLocal()) {
-            throw new \RuntimeException('DevAdminSeeder runs in the local environment only.');
+            throw new RuntimeException('DevAdminSeeder runs in the local environment only.');
         }
 
         $email = (string) env('ADMIN_EMAIL', 'admin@example.com');

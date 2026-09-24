@@ -10,6 +10,7 @@ use chillerlan\QRCode\QROptions;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use OTPHP\TOTP;
+use Throwable;
 
 class MfaService
 {
@@ -109,7 +110,7 @@ class MfaService
 
         try {
             $totp = TOTP::createFromSecret($secret);
-        } catch (\Throwable) {
+        } catch (Throwable) {
             return false;
         }
 
@@ -117,8 +118,9 @@ class MfaService
 
         try {
             return $totp->verify($code, null, $leeway);
-        } catch (\Throwable) {
+        } catch (Throwable) {
             // Fail closed on misconfiguration (e.g. leeway >= period).
+
             return false;
         }
     }

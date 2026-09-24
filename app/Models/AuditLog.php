@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Carbon;
+use LogicException;
 
 /**
  * Append-only audit trail (DATABASE.md §3.7, SECURITY.md §1).
@@ -74,7 +75,7 @@ class AuditLog extends Model
 
     public function delete()
     {
-        throw new \LogicException('Audit logs are append-only and cannot be deleted.');
+        throw new LogicException('Audit logs are append-only and cannot be deleted.');
     }
 
     /**
