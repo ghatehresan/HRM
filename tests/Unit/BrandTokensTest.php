@@ -29,7 +29,7 @@ final class BrandTokensTest extends TestCase
 
         $missing = [];
         foreach ($tokens['color'] as $name => $definition) {
-            if (!str_contains($css, (string) $definition['value'])) {
+            if (! str_contains($css, (string) $definition['value'])) {
                 $missing[] = "{$name} ({$definition['value']})";
             }
         }

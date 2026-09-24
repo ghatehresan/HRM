@@ -110,8 +110,8 @@ final class Jalali
     /**
      * Format a Gregorian date as Jalali with Persian digits.
      *
-     * @param string|int $value 'Y-m-d', a datetime string, or a unix timestamp
-     * @param string $format short|long|month|full
+     * @param  string|int  $value  'Y-m-d', a datetime string, or a unix timestamp
+     * @param  string  $format  short|long|month|full
      */
     public static function format(string|int $value, string $format = 'short'): string
     {
