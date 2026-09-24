@@ -128,7 +128,7 @@ final class Jalali
         [$jy, $jm, $jd] = self::gregorianToJalali(
             (int) date('Y', $timestamp),
             (int) date('n', $timestamp),
-            (int) date('j', $timestamp)
+            (int) date('j', $timestamp),
         );
 
         return match ($format) {

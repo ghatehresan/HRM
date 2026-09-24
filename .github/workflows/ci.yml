@@ -44,7 +44,22 @@ jobs:
         run: php artisan key:generate
 
       - name: Check code style
-        run: vendor/bin/pint --test
+        run: |
+          set -o pipefail
+          vendor/bin/pint --test -v 2>&1 | tee pint-output.txt
+
+      # TEMPORARY (M1 sandbox has no access to CI logs): if Pint fails,
+      # apply its fixes and post the exact diff as a commit comment so the
+      # required changes are visible. REMOVE before merging to main.
+      - name: TEMPORARY — report pint diff
+        if: failure() && matrix.php == '8.4'
+        run: |
+          vendor/bin/pint >/dev/null 2>&1 || true
+          git diff -- app routes config database tests > pint-diff.txt || true
+          BODY="TEMPORARY M1 DEBUG — what Pint wants to change:"$'\n```diff\n'"$(head -c 55000 pint-diff.txt)"$'\n```'
+          gh api -X POST "repos/${{ github.repository }}/commits/${{ github.sha }}/comments" -f body="$BODY"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Static analysis
         run: vendor/bin/phpstan analyse --no-progress

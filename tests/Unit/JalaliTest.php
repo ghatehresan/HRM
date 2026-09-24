@@ -47,7 +47,7 @@ final class JalaliTest extends TestCase
             $this->assertSame(
                 [$year, $month, $day],
                 Jalali::jalaliToGregorian($jy, $jm, $jd),
-                "Round-trip failed for {$year}-{$month}-{$day}"
+                "Round-trip failed for {$year}-{$month}-{$day}",
             );
         }
     }
