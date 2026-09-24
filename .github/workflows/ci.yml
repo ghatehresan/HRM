@@ -44,7 +44,7 @@ jobs:
         run: php artisan key:generate
 
       - name: Check code style
-        run: vendor/bin/pint --test -v 2>&1 | tee pint-${{ matrix.php }}.log; echo "pint-exit=${PIPESTATUS[0]} (diagnostic mode: never gates)"
+        run: vendor/bin/pint --test -v 2>&1 | tee pint-${{ matrix.php }}.log; echo "pint-exit=${PIPESTATUS[0]} (diagnostic mode - never gates)"
 
       - name: Static analysis
         run: vendor/bin/phpstan analyse --no-progress
