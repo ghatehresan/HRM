@@ -28,8 +28,6 @@ return new class extends Migration
 
             $table->index('user_id');
             $table->index('event');
-            $table->index('auditable_type');
-            $table->index('auditable_id');
             $table->index('created_at');
             $table->index(['auditable_type', 'auditable_id']);
         });

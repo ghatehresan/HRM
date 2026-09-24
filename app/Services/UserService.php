@@ -15,7 +15,7 @@ class UserService
 {
     /**
      * @param  array<string, mixed>  $data  validated admin input
-     * @param  array<mixed>  $roleSlugs
+     * @param  string[]  $roleSlugs
      */
     public function createUser(array $data, array $roleSlugs = []): User
     {
@@ -42,7 +42,7 @@ class UserService
 
     /**
      * @param  array<string, mixed>  $data  validated admin input
-     * @param  array<mixed>|null  $roleSlugs  null = leave roles untouched
+     * @param  string[]|null  $roleSlugs  null = leave roles untouched
      */
     public function updateUser(User $actor, User $user, array $data, ?array $roleSlugs = null): User
     {
@@ -102,7 +102,7 @@ class UserService
     }
 
     /**
-     * @param  array<mixed>  $roleSlugs
+     * @param  string[]  $roleSlugs
      */
     public function syncRoles(User $user, array $roleSlugs): void
     {

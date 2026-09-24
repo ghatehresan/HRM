@@ -14,7 +14,7 @@ class RoleService
 {
     /**
      * @param  array<string, mixed>  $data  validated admin input
-     * @param  array<mixed>  $permissionNames
+     * @param  string[]  $permissionNames
      */
     public function createRole(array $data, array $permissionNames = []): Role
     {
@@ -38,7 +38,7 @@ class RoleService
 
     /**
      * @param  array<string, mixed>  $data  validated admin input
-     * @param  array<mixed>|null  $permissionNames  null = leave grants untouched
+     * @param  string[]|null  $permissionNames  null = leave grants untouched
      */
     public function updateRole(Role $role, array $data, ?array $permissionNames = null): Role
     {
@@ -71,7 +71,7 @@ class RoleService
     }
 
     /**
-     * @param  array<mixed>  $permissionNames
+     * @param  string[]  $permissionNames
      */
     public function syncPermissions(Role $role, array $permissionNames): void
     {

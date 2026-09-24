@@ -117,7 +117,7 @@ class User extends Authenticatable
             return true;
         }
 
-        /** @var string[] $roles */
+        /** @var string[] */
         $roles = (array) config('hrm.auth.mfa_required_roles', []);
 
         return $roles === [] ? false : $this->hasRole(...$roles);
@@ -140,7 +140,7 @@ class User extends Authenticatable
         $threshold = (int) config('hrm.auth.lockout_threshold', 5);
 
         if ($attempts >= $threshold) {
-            /** @var int[] $durations */
+            /** @var int[] */
             $durations = (array) config('hrm.auth.lockout_durations', [3600]);
             $step = min($attempts - $threshold, count($durations) - 1);
             $attributes['locked_until'] = now()->addSeconds((int) ($durations[$step] ?? 3600));

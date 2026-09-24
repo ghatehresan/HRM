@@ -149,7 +149,7 @@ final class Jalali
      * (mail, audit UI, exports). Accepts unix timestamps, UTC datetime
      * strings, or DateTimeInterface instances.
      *
-     * @param  string|int|DateTimeInterface  $value
+     * @param  string|int|DateTimeInterface  $value  unix timestamp, UTC datetime string, or DateTimeInterface
      * @param  string  $timezone  e.g. 'Asia/Tehran'
      * @param  string  $format  short|long|month|full
      */

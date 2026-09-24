@@ -70,7 +70,7 @@ class StrongPassword implements ValidationRule
             }
         }
 
-        $score = (int) (new Zxcvbn())->passwordStrength($value)['score'];
+        $score = (int) (new Zxcvbn)->passwordStrength($value)['score'];
         $minScore = (int) config('hrm.auth.password_zxcvbn_min_score', 3);
 
         if ($score < $minScore) {

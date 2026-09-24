@@ -24,7 +24,7 @@ final class BrandTokensTest extends TestCase
         $decoded = json_decode((string) file_get_contents($tokensPath), true);
         $this->assertIsArray($decoded);
 
-        /** @var array{color: array<string, array{value: string, role: string}>} $tokens */
+        /** @var array{color: array<string, array{value: string, role: string}>} */
         $tokens = $decoded;
 
         $css = (string) file_get_contents($cssPath);
@@ -45,7 +45,7 @@ final class BrandTokensTest extends TestCase
         // MUST document the 10% cap so reviewers keep enforcing it.
         $tokensPath = __DIR__.'/../../resources/tokens/design-tokens.json';
 
-        /** @var array{color: array<string, array{value: string, role: string}>} $tokens */
+        /** @var array{color: array<string, array{value: string, role: string}>} */
         $tokens = json_decode((string) file_get_contents($tokensPath), true);
 
         $this->assertStringContainsString('10%', $tokens['color']['orange']['role']);
