@@ -8,6 +8,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,8 +36,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, Role> $roles
- * @property-read \Illuminate\Database\Eloquent\Collection<int, MfaMethod> $mfaMethods
+ * @property-read Collection<int, Role> $roles
+ * @property-read Collection<int, MfaMethod> $mfaMethods
  */
 #[Fillable(['name', 'email', 'password'])]
 #[Hidden(['password', 'remember_token'])]

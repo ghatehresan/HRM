@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Middleware\CheckPermission;
+use App\Http\Middleware\CheckRole;
+use App\Http\Middleware\EnsureSessionFresh;
+use App\Http\Middleware\EnsureUserIsActive;
+use App\Http\Middleware\RequireMfa;
+use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,19 +20,19 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'permission' => \App\Http\Middleware\CheckPermission::class,
-            'role' => \App\Http\Middleware\CheckRole::class,
-            'is-active' => \App\Http\Middleware\EnsureUserIsActive::class,
-            'session-fresh' => \App\Http\Middleware\EnsureSessionFresh::class,
-            'mfa-required' => \App\Http\Middleware\RequireMfa::class,
+            'permission' => CheckPermission::class,
+            'role' => CheckRole::class,
+            'is-active' => EnsureUserIsActive::class,
+            'session-fresh' => EnsureSessionFresh::class,
+            'mfa-required' => RequireMfa::class,
         ]);
 
         $middleware->web(append: [
-            \App\Http\Middleware\SecurityHeaders::class,
+            SecurityHeaders::class,
         ]);
 
         $middleware->api(append: [
-            \App\Http\Middleware\SecurityHeaders::class,
+            SecurityHeaders::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

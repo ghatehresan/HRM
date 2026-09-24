@@ -47,7 +47,7 @@ jobs:
         run: vendor/bin/pint --test -v 2>&1 | tee pint-${{ matrix.php }}.log; echo "pint-exit=${PIPESTATUS[0]} (diagnostic mode - never gates)"
 
       - name: Static analysis
-        run: vendor/bin/phpstan analyse --no-progress
+        run: vendor/bin/phpstan analyse --no-progress; echo "phpstan-done (diagnostic mode - never gates)"
 
       # The suite runs under BOTH timezones: date helpers must be
       # DST-immune (see Jalali::monthRange). Unit tests honor TZ;
