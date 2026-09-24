@@ -1,0 +1,105 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+/*
+ * GhatehResan HRM theme — generated FROM resources/tokens/design-tokens.json.
+ * Do not invent new colors: every value here must exist in the token file
+ * (enforced by tests/Unit/BrandTokensTest.php).
+ */
+@theme {
+    --color-navy: #0E2A47;
+    --color-navy-2: #16375A;
+    --color-orange: #F26B1D;
+    --color-orange-d: #D25510;
+    --color-ink: #111820;
+    --color-steel: #55616E;
+    --color-line: #E8EBEF;
+    --color-paper: #F9FAFB;
+    --color-success: #1F9D55;
+    --color-success-d: #15703C;
+    --color-danger: #D93025;
+    --color-danger-d: #A3201A;
+    --color-warning: #F0A202;
+    --color-warning-d: #7A5200;
+    --color-info: #2563EB;
+    --color-info-d: #1A47A8;
+
+    --color-sidebar-text: #C6D3E1;
+    --color-sidebar-dim: #8AA0B8;
+
+    --font-fa: 'Vazirmatn', Tahoma, 'Segoe UI', sans-serif;
+    --font-en: 'Inter', ui-monospace, Menlo, Consolas, monospace;
+
+    --shadow-card: 0 1px 3px rgba(14, 42, 71, 0.07), 0 4px 14px rgba(14, 42, 71, 0.05);
+
+    --breakpoint-tablet: 900px;
+}
+
+/* Self-hosted Vazirmatn — never a CDN (brand book §06). */
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('/fonts/Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('/fonts/Vazirmatn-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('/fonts/Vazirmatn-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('/fonts/Vazirmatn-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-display: swap;
+}
+
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        @apply bg-paper font-fa text-ink;
+        font-size: 14.5px;
+        line-height: 1.85;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-info);
+        outline-offset: 2px;
+    }
+}
+
+@layer components {
+    /* Thin sidebar scrollbar (same behavior as management-system). */
+    .side-scroll::-webkit-scrollbar {
+        width: 5px;
+    }
+    .side-scroll::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.16);
+        border-radius: 3px;
+    }
+
+    /* Numeric/code inputs are always LTR, even in RTL pages. */
+    .ltr-input {
+        direction: ltr;
+        unicode-bidi: isolate;
+    }
+}
+
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}

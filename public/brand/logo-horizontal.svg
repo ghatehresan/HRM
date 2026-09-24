@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 240" width="740" height="240" role="img" aria-label="قطعه‌رسان — GhatehResan">
+  <defs>
+    <!-- NOTE: external @import removed per brand book (self-hosted fonts only). -->
+  </defs>
+  <!-- نماد در سمت راست (شروع خوانش فارسی) -->
+  <g transform="translate(490,10)">
+    <path d="M 37.7 72.5 L 120 25 L 202.3 72.5 L 202.3 167.5 L 120 215 L 37.7 167.5"
+          fill="none" stroke="#0E2A47" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="150,108 78,108 78,86 20,120 78,154 78,132 150,132" fill="#F26B1D"/>
+  </g>
+  <!-- نام‌نویس در سمت چپ نماد -->
+  <text x="480" y="130" text-anchor="start" direction="rtl" font-family="Vazirmatn, Tahoma, sans-serif" font-weight="900" font-size="82">
+    <tspan fill="#0E2A47">قطعه‌</tspan><tspan fill="#F26B1D">رسان</tspan>
+  </text>
+  <text x="480" y="182" text-anchor="end" font-family="Vazirmatn, Arial, sans-serif" font-size="18" letter-spacing="6" fill="#55616E">GHATEHRESAN</text>
+</svg>

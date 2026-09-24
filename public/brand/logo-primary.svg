@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="قطعه‌رسان — GhatehResan">
+  <defs>
+    <!-- NOTE: external @import removed per brand book (self-hosted fonts only). -->
+  </defs>
+  <!-- نماد: مهرهٔ شش‌گوش (قطعه) + فلش (رسان) -->
+  <g transform="translate(84,2)">
+    <path d="M 37.7 72.5 L 120 25 L 202.3 72.5 L 202.3 167.5 L 120 215 L 37.7 167.5"
+          fill="none" stroke="#0E2A47" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="150,108 78,108 78,86 20,120 78,154 78,132 150,132" fill="#F26B1D"/>
+  </g>
+  <!-- نام‌نویس -->
+  <text x="200" y="322" text-anchor="middle" font-family="Vazirmatn, Tahoma, sans-serif" font-weight="900" font-size="78">
+    <tspan fill="#0E2A47">قطعه‌</tspan><tspan fill="#F26B1D">رسان</tspan>
+  </text>
+  <text x="203" y="368" text-anchor="middle" font-family="Vazirmatn, Arial, sans-serif" font-size="20" letter-spacing="7" fill="#55616E">GHATEHRESAN</text>
+</svg>

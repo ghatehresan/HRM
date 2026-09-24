@@ -1,0 +1,11 @@
+parameters:
+    # M1 baseline: level 5 across first-party code.
+    # Roadmap: add larastan in M2 (Identity/Eloquent-heavy) and raise to 8.
+    level: 5
+    paths:
+        - app
+        - database
+        - routes
+        - tests
+    excludePaths:
+        - vendor

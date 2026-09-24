@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-label="قطعه‌رسان — نسخهٔ تک‌رنگ">
+  <!-- نسخهٔ تک‌رنگ: رنگ از طریق currentColor (با CSS روی عنصر svg تنظیم شود) -->
+  <g transform="translate(84,2)">
+    <path d="M 37.7 72.5 L 120 25 L 202.3 72.5 L 202.3 167.5 L 120 215 L 37.7 167.5"
+          fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="150,108 78,108 78,86 20,120 78,154 78,132 150,132" fill="currentColor"/>
+  </g>
+  <text x="200" y="322" text-anchor="middle" font-family="Vazirmatn, Tahoma, sans-serif" font-weight="900" font-size="78">
+    <tspan fill="currentColor">قطعه‌</tspan><tspan fill="currentColor">رسان</tspan>
+  </text>
+  <text x="203" y="368" text-anchor="middle" font-family="Vazirmatn, Arial, sans-serif" font-size="20" letter-spacing="7" fill="currentColor">GHATEHRESAN</text>
+</svg>

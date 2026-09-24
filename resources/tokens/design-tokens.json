@@ -1,0 +1,52 @@
+{
+    "$meta": {
+        "name": "GhatehResan HRM design tokens",
+        "version": "1.0.0",
+        "source": "brand-ghatehresan/brand-book.html (:root) + رنگ-های-برند.txt (Brand Book v1.0)",
+        "derived": "hover shades + sidebar text + dark text variants from ghatehresan-management-system/public/assets/app.css",
+        "rule": "If a value here differs from the brand book, the brand book wins. Enforced by tests/Unit/BrandTokensTest.php."
+    },
+    "color": {
+        "navy": { "value": "#0E2A47", "role": "primary — sidebar, headers, headlines (AAA on white)" },
+        "navy-2": { "value": "#16375A", "role": "derived — hover for navy" },
+        "orange": { "value": "#F26B1D", "role": "accent — call-to-action only, max 10% of any page" },
+        "orange-d": { "value": "#D25510", "role": "derived — hover for orange" },
+        "ink": { "value": "#111820", "role": "oil black — primary text" },
+        "steel": { "value": "#55616E", "role": "secondary text" },
+        "line": { "value": "#E8EBEF", "role": "borders, dividers" },
+        "paper": { "value": "#F9FAFB", "role": "page background" },
+        "success": { "value": "#1F9D55", "role": "functional — available/success" },
+        "success-d": { "value": "#15703C", "role": "derived — dark text variant of success" },
+        "danger": { "value": "#D93025", "role": "functional — error/unavailable" },
+        "danger-d": { "value": "#A3201A", "role": "derived — hover/dark variant of danger" },
+        "warning": { "value": "#F0A202", "role": "functional — warning/low stock" },
+        "warning-d": { "value": "#7A5200", "role": "derived — dark text variant of warning" },
+        "info": { "value": "#2563EB", "role": "functional — informational" },
+        "info-d": { "value": "#1A47A8", "role": "derived — hover/dark variant of info" },
+        "sidebar-text": { "value": "#C6D3E1", "role": "derived — nav item text on navy" },
+        "sidebar-dim": { "value": "#8AA0B8", "role": "derived — dimmed text on navy" }
+    },
+    "font": {
+        "fa": {
+            "value": "Vazirmatn",
+            "weights": [400, 500, 700, 900],
+            "source": "self-hosted woff2 in public/fonts (OFL-licensed, no external CDN)"
+        },
+        "en": {
+            "value": "Inter",
+            "role": "latin/technical strings: codes, IDs, technical numbers"
+        }
+    },
+    "layout": {
+        "sidebar": "252px",
+        "radius": "12px",
+        "breakpoint-tablet": "900px"
+    },
+    "shadow": {
+        "card": "0 1px 3px rgba(14,42,71,.07), 0 4px 14px rgba(14,42,71,.05)"
+    },
+    "type": {
+        "tool-body": { "size": "14.5px", "line-height": 1.85, "role": "dense internal-tool text (from management-system)" },
+        "content-body": { "size": "16.5px", "line-height": 1.9, "role": "content pages (from brand book §06)" }
+    }
+}

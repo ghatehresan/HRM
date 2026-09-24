@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img" aria-label="آیکون اپلیکیشن قطعه‌رسان">
+  <!-- آیکون اپلیکیشن: نماد روی زمینهٔ سرمه‌ای -->
+  <rect width="240" height="240" rx="54" fill="#0E2A47"/>
+  <g transform="translate(24,24) scale(0.8)">
+    <path d="M 37.7 72.5 L 120 25 L 202.3 72.5 L 202.3 167.5 L 120 215 L 37.7 167.5"
+          fill="none" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="150,108 78,108 78,86 20,120 78,154 78,132 150,132" fill="#F26B1D"/>
+  </g>
+</svg>
