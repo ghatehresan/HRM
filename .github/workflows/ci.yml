@@ -11,11 +11,6 @@ jobs:
   php:
     runs-on: ubuntu-latest
 
-    # TEMPORARY (M1): contents:write only so the debug step below can post
-    # a commit comment. Revert to the top-level contents:read before merging.
-    permissions:
-      contents: write
-
     strategy:
       fail-fast: false
       matrix:
@@ -52,19 +47,7 @@ jobs:
         run: vendor/bin/pint --test
 
       - name: Static analysis
-        run: |
-          set -o pipefail
-          vendor/bin/phpstan analyse --no-progress 2>&1 | tee phpstan-output.txt
-
-      # TEMPORARY (M1 sandbox has no access to CI logs): if PHPStan fails,
-      # post its output as a commit comment. REMOVE before merging to main.
-      - name: TEMPORARY — report phpstan output
-        if: failure() && matrix.php == '8.4'
-        run: |
-          BODY="TEMPORARY M1 DEBUG (PHP ${{ matrix.php }}) — phpstan output:"$'\n```\n'"$(head -c 55000 phpstan-output.txt)"$'\n```'
-          gh api -X POST "repos/${{ github.repository }}/commits/${{ github.sha }}/comments" -f body="$BODY"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: vendor/bin/phpstan analyse --no-progress
 
       # The suite runs under BOTH timezones: date helpers must be
       # DST-immune (see Jalali::monthRange). Unit tests honor TZ;

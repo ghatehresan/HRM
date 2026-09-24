@@ -21,9 +21,11 @@ final class BrandTokensTest extends TestCase
         $this->assertFileExists($tokensPath);
         $this->assertFileExists($cssPath);
 
+        $decoded = json_decode((string) file_get_contents($tokensPath), true);
+        $this->assertIsArray($decoded);
+
         /** @var array{color: array<string, array{value: string, role: string}>} $tokens */
-        $tokens = json_decode((string) file_get_contents($tokensPath), true);
-        $this->assertIsArray($tokens);
+        $tokens = $decoded;
 
         $css = (string) file_get_contents($cssPath);
 

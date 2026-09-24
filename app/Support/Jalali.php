@@ -166,13 +166,13 @@ final class Jalali
             return null;
         }
 
-        $year = (int) ($matches[1] ?? 0);
+        $year = (int) $matches[1];
 
         if ($year > 1700) {
-            return sprintf('%04d-%02d-%02d', $year, (int) ($matches[2] ?? 0), (int) ($matches[3] ?? 0));
+            return sprintf('%04d-%02d-%02d', $year, (int) $matches[2], (int) $matches[3]);
         }
 
-        [$gy, $gm, $gd] = self::jalaliToGregorian($year, (int) ($matches[2] ?? 0), (int) ($matches[3] ?? 0));
+        [$gy, $gm, $gd] = self::jalaliToGregorian($year, (int) $matches[2], (int) $matches[3]);
 
         return sprintf('%04d-%02d-%02d', $gy, $gm, $gd);
     }
