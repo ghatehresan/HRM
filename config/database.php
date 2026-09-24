@@ -54,7 +54,11 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_persian_ci'),
+            // Force UTC session timezone (offset form needs no tz tables and
+            // no privilege, safe on shared hosts). Makes TIMESTAMP columns
+            // behave exactly like DATETIME for our UTC writes/reads (A-5).
+            'timezone' => '+00:00',
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,
@@ -74,7 +78,9 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => env('DB_CHARSET', 'utf8mb4'),
-            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_persian_ci'),
+            // Same UTC-session rationale as the mysql connection above.
+            'timezone' => '+00:00',
             'prefix' => '',
             'prefix_indexes' => true,
             'strict' => true,

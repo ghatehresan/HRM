@@ -38,6 +38,7 @@
 ```
 M2: roles → permissions → users(ALTER) → role_user → permission_role
     → mfa_methods → personal_access_tokens → audit_logs
+    فایل‌ها: `2026_09_24_000001` تا `2026_09_24_000008` (دقیقاً به همان ترتیب بالا).
 M3: companies → branches → departments → positions → teams
     (ستون‌های manager/lead در M3 ساخته می‌شوند اما FK آن‌ها در M4 اضافه می‌شود)
 M4: employees → employee_contacts → employee_bank_accounts → compensations
@@ -164,6 +165,9 @@ department-manager · team-lead · employee · finance · auditor.
 | `created_at` | `DATETIME` INDEX |
 
 > بدون `updated_at` · بدون `deleted_at` · بدون مسیر حذف در هیچ لایه‌ای.
+> پیاده‌سازی M2: ایندکس morph به‌صورت composite روی `(auditable_type, auditable_id)`
+> ساخته شد (به‌جای دو ایندکس جدا) چون همهٔ کوئری‌های morph هر دو ستون را با هم
+> فیلتر می‌کنند؛ `event` و `user_id` و `created_at` ایندکس جدا دارند.
 
 ---
 

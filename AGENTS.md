@@ -44,6 +44,13 @@ composer audit && npm audit --audit-level=high    # امنیت وابستگی‌
 Security check → بازبینی diff → به‌روزرسانی مستندات → commit معنادار (فارسی/انگلیسی).
 Featureهای مهم با PR؛ این session روی branch فعلی کار می‌کند — branch عوض نکن.
 
+## افزودن قابلیت هویتی (M2+)
+
+- مجوز جدید: سطر در `PermissionSeeder` + اتصال به نقش‌ها + Policy + ‏`can:` روی مسیر + تست (مجاز/غیرمجاز) + سطر در `AUTHORIZATION.md`.
+- رویداد Audit جدید: ثبت در `AuditLog::record` + افزودن به `knownEvents` (فیلتر UI) + تست assertDatabaseHas.
+- فرم جدید: کامپوننت‌های `x-form/*` + ‏`x-btn`؛ خطاها خودکار زیر فیلد می‌آیند؛ بدون CSS درون‌خطی.
+- تغییر Schema: migration جدید + به‌روزرسانی `DATABASE.md` (هرگز ویرایش migration اجراشده).
+
 ## اگر sandbox به Packagist/PHP دسترسی نداشت
 
 - سینتکس PHP: `node /tmp/phpcheck/check.mjs <files>`

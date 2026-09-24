@@ -40,6 +40,16 @@ npm run build                                      # بیلد فرانت‌ان�
 | `tests/Unit/PersianNumbersTest` | ۵ تست | تبدیل ارقام، money، toInt، plain |
 | `tests/Unit/BrandTokensTest` | ۲ تست | ضد انحراف توکن↔تم + قاعدهٔ ۱۰٪ نارنجی |
 | `tests/Feature/WelcomeTest` | ۲ تست | رندر شل RTL + ساختار `/health` |
+| `tests/Unit/JalaliTimezoneTest` | ۴ تست | wall-clock تهران، عبور از نیمه‌شب، ورودی‌های DateTime/int، رد ورودی خراب |
+| `tests/Feature/Auth/*` | ۳۱ تست | ورود/خروج، throttle، قفل پلکانی، ریست رمز، تغییر رمز، StrongPassword، چرخهٔ کامل MFA |
+| `tests/Feature/Rbac/RbacTest` | ۷ تست | bypass سوپرادمین، 403، سیاست‌ها، خروج کاربر غیرفعال، timeout مطلق نشست |
+| `tests/Feature/Admin/*` | ۱۶ تست | CRUD کاربران/نقش‌ها، نگهبان‌های self، جست‌وجو، فیلترها و immutability لاگ |
+| `tests/Feature/Api/ApiAuthTest` | ۶ تست | صدور/مصرف/ابطال توکن، 401 بدون توکن، MFA روی صدور، توکن منقضی/غیرفعال |
+| `tests/Feature/Security/*` | ۹ تست | دروازهٔ ماتریس M46، هشینگ، هدرهای امنیتی |
+| `tests/Feature/Database/SeedersTest` | ۲ تست | idempotency سیدرهای هویتی، منع DevSeeder در غیرlocal |
+
+مجموع M2: ۷۵ تست جدید (جمع کل: ۹۱). منطق خالص Jalali زیر PHP 8.3 واقعی
+(WASM) با ۷۶/۷۶ assertion در هر دو timezone سبز است (رجوع به §۷).
 
 ## ۴. قراردادهای نوشتن تست
 
@@ -70,11 +80,17 @@ npm run build                                      # بیلد فرانت‌ان�
 □ مسیرهای /api/v1/* بدون توکن 401 می‌دهند، نه 500/redirect
 ```
 
-## ۶. E2E (از M2 — Playwright)
+## ۶. E2E (از M3 — Playwright)
 
 جریان‌های حیاتی: ورود/خروج · ساخت کارمند · درخواست مرخصی · تأیید مرخصی ·
 آپلود مدرک · بررسی دسترسی (کاربر کم‌مجوز) · تغییر رمز.
 اجرا در CI روی هر PR به `main`.
+
+> وضعیت M2: سوئیت E2E نوشته نشد. دلیل: sandbox توسعه نه مرورگر دارد نه
+> شبکه برای نصب Playwright، و E2E نوشته‌شدهٔ «نابینا» (بدون حتی یک اجرای
+> محلی) ریسک قرمزی دائمی CI را دارد. به‌جایش چرخه‌های حیاتی احراز هویت
+> (ورود/خروج/MFA/ریست رمز) با ۳۱ تست Feature پوشش داده شدند و E2E از M3
+> با job اختصاصی CI و اجرای محلی اجباری قبل از push برمی‌گردد.
 
 ## ۷. راستی‌آزمایی در محیط محدود (سند تاریخی M1)
 

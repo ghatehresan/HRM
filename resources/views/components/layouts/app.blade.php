@@ -7,7 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ? $title.' — ' : '' }}{{ config('hrm.product_name') }}</title>
     <link rel="icon" href="/brand/logo-icon.svg" type="image/svg+xml">
-    <style>[x-cloak]{display:none!important}</style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
@@ -43,10 +42,58 @@
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                 <span>سلامت سیستم</span>
             </a>
+
+            @canany(['users.view', 'roles.view', 'audit.view'])
+                <div class="px-3.5 pb-1 pt-3 text-[11.5px] font-bold text-sidebar-dim">مدیریت دسترسی</div>
+                @can('users.view')
+                    <a href="{{ route('admin.users.index') }}"
+                       class="mb-0.5 flex items-center gap-3 rounded-lg px-3.5 py-2.5 text-sm font-medium transition {{ request()->routeIs('admin.users.*') ? 'bg-orange font-bold text-white' : 'hover:bg-white/10 hover:text-white' }}">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <span>کاربران</span>
+                    </a>
+                @endcan
+                @can('roles.view')
+                    <a href="{{ route('admin.roles.index') }}"
+                       class="mb-0.5 flex items-center gap-3 rounded-lg px-3.5 py-2.5 text-sm font-medium transition {{ request()->routeIs('admin.roles.*') ? 'bg-orange font-bold text-white' : 'hover:bg-white/10 hover:text-white' }}">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                        <span>نقش‌ها</span>
+                    </a>
+                @endcan
+                @can('audit.view')
+                    <a href="{{ route('admin.audit-logs.index') }}"
+                       class="mb-0.5 flex items-center gap-3 rounded-lg px-3.5 py-2.5 text-sm font-medium transition {{ request()->routeIs('admin.audit-logs.*') ? 'bg-orange font-bold text-white' : 'hover:bg-white/10 hover:text-white' }}">
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                        <span>لاگ حسابرسی</span>
+                    </a>
+                @endcan
+            @endcanany
+
+            @auth
+                <div class="px-3.5 pb-1 pt-3 text-[11.5px] font-bold text-sidebar-dim">حساب من</div>
+                <a href="{{ route('password.change.edit') }}"
+                   class="mb-0.5 flex items-center gap-3 rounded-lg px-3.5 py-2.5 text-sm font-medium transition {{ request()->routeIs('password.change.*') ? 'bg-orange font-bold text-white' : 'hover:bg-white/10 hover:text-white' }}">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>تغییر رمز</span>
+                </a>
+                <a href="{{ route('mfa.setup') }}"
+                   class="mb-0.5 flex items-center gap-3 rounded-lg px-3.5 py-2.5 text-sm font-medium transition {{ request()->routeIs('mfa.*') ? 'bg-orange font-bold text-white' : 'hover:bg-white/10 hover:text-white' }}">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    <span>تأیید دومرحله‌ای</span>
+                </a>
+            @endauth
         </nav>
 
         <div class="border-t border-white/10 px-4 py-3">
-            <div class="text-center text-[11px] text-sidebar-dim">نسخهٔ ۰٫۱ — Milestone 1</div>
+            @auth
+                <div class="mb-2 truncate text-center text-[12px] font-bold text-white">{{ auth()->user()->name }}</div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="w-full rounded-lg bg-white/10 px-3 py-2 text-[13px] font-bold text-white transition hover:bg-white/20">خروج</button>
+                </form>
+            @else
+                <a href="{{ route('login') }}" class="block rounded-lg bg-orange px-3 py-2 text-center text-[13px] font-bold text-white transition hover:bg-orange-d">ورود</a>
+            @endauth
+            <div class="mt-2 text-center text-[11px] text-sidebar-dim">نسخهٔ ۰٫۲ — Milestone 2</div>
         </div>
     </aside>
 

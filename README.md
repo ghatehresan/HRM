@@ -14,7 +14,7 @@ Production-ready و یکپارچه با اکوسیستم موجود (برند، 
 | Backend | PHP 8.3+ · **Laravel 13** |
 | Database | MySQL / MariaDB (`utf8mb4_persian_ci`) در **همهٔ** محیط‌ها |
 | Frontend | Blade + Alpine.js + Tailwind CSS v4 (Vite) |
-| Auth (از M2) | Session/Cookie + Sanctum tokens |
+| Auth | Session/Cookie + MFA (TOTP) + Sanctum tokens |
 | Queue / Cache / Session | درایور `database` (بدون Redis — رجوع به `AUDIT.md` §۲۲٫۵) |
 | Test | PHPUnit 12 · Pint · PHPStan · Playwright (از M2) |
 | CI | GitHub Actions (PHP 8.3/8.4 + Node 22) |

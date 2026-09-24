@@ -140,6 +140,41 @@ final class Jalali
     }
 
     /**
+     * Format an absolute instant (UTC storage) as wall-clock time in the
+     * given timezone — the ONLY correct way to render stored timestamps
+     * (mail, audit UI, exports). Accepts unix timestamps, UTC datetime
+     * strings, or DateTimeInterface instances.
+     *
+     * @param  string|int|\DateTimeInterface  $value
+     * @param  string  $timezone  e.g. 'Asia/Tehran'
+     * @param  string  $format  short|long|month|full
+     */
+    public static function formatInTimezone(string|int|\DateTimeInterface $value, string $timezone, string $format = 'short'): string
+    {
+        if ($value instanceof \DateTimeInterface) {
+            $timestamp = $value->getTimestamp();
+        } elseif (is_int($value)) {
+            $timestamp = $value;
+        } else {
+            $parsed = strtotime($value.' UTC');
+
+            if ($parsed === false) {
+                return '—';
+            }
+
+            $timestamp = $parsed;
+        }
+
+        if ($timestamp <= 0) {
+            return '—';
+        }
+
+        $wall = (new \DateTimeImmutable('@'.$timestamp))->setTimezone(new \DateTimeZone($timezone));
+
+        return self::format($wall->format('Y-m-d H:i:s'), $format);
+    }
+
+    /**
      * Today as a Jalali date.
      *
      * @return array{int, int, int} [jalaliYear, jalaliMonth, jalaliDay]

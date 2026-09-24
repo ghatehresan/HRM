@@ -1,5 +1,5 @@
 <x-layouts.app title="خانه">
-    <x-page-head title="منابع انسانی قطعه‌رسان" sub="بنیان سیستم — Milestone 1">
+    <x-page-head title="منابع انسانی قطعه‌رسان" sub="بنیان سیستم — Milestone 2">
         <x-slot:actions>
             <x-btn href="{{ route('health') }}" tone="navy">سلامت سیستم</x-btn>
         </x-slot:actions>
@@ -12,12 +12,22 @@
         <x-stat label="امروز" :value="\App\Support\Jalali::format(date('Y-m-d'), 'long')" />
     </div>
 
-    <x-card title="وضعیت Milestone 1">
+    @guest
+        <x-card title="شروع">
+            <p class="mb-3 text-[13.5px] leading-7 text-steel">
+                برای ادامه وارد شوید. اگر حسابی ندارید، مدیر سیستم باید برایتان بسازد؛
+                ثبت‌نام عمومی نداریم.
+            </p>
+            <x-btn href="{{ route('login') }}" tone="primary">ورود به سیستم</x-btn>
+        </x-card>
+    @endguest
+
+    <x-card title="وضعیت Milestone 2">
         <div class="flex flex-wrap items-center gap-2">
             <x-badge tone="green">معماری تأیید شد</x-badge>
             <x-badge tone="info">Design System پایه</x-badge>
             <x-badge tone="navy">تقویم شمسی</x-badge>
-            <x-badge tone="amber">احراز هویت: در Milestone 2</x-badge>
+            <x-badge tone="green">هویت و دسترسی</x-badge>
         </div>
         <p class="mt-3 text-[13.5px] leading-7 text-steel">
             این صفحه با لی‌اوت RTL، فونت وزیرمتن خودمیزبانی‌شده و توکن‌های کتاب برند
@@ -33,6 +43,20 @@
     </x-card>
 
     <x-card title="ماژول‌ها">
-        <x-empty-state title="هنوز ماژولی فعال نشده است" sub="ماژول احراز هویت و مجوزها در Milestone 2 اضافه می‌شود." icon="▦" />
+        @auth
+            <div class="flex flex-wrap gap-2">
+                @can('users.view')
+                    <x-btn href="{{ route('admin.users.index') }}" tone="navy">کاربران</x-btn>
+                @endcan
+                @can('roles.view')
+                    <x-btn href="{{ route('admin.roles.index') }}" tone="navy">نقش‌ها</x-btn>
+                @endcan
+                @can('audit.view')
+                    <x-btn href="{{ route('admin.audit-logs.index') }}" tone="navy">لاگ حسابرسی</x-btn>
+                @endcan
+            </div>
+        @else
+            <x-empty-state title="پس از ورود، ماژول‌های شما اینجا نمایش داده می‌شود" sub="دسترسی هر کاربر به نقش او بستگی دارد." icon="▦" />
+        @endauth
     </x-card>
 </x-layouts.app>
