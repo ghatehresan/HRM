@@ -11,8 +11,13 @@ jobs:
   php:
     runs-on: ubuntu-latest
 
+    # TEMPORARY (M1): contents:write only so the debug step below can post
+    # a commit comment. Revert to the top-level contents:read before merging.
+    permissions:
+      contents: write
+
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         php: ['8.3', '8.4']
 
