@@ -108,7 +108,7 @@ resources/
 ├── css/app.css                → تم Tailwind v4 + فونت‌ها ✅ M1
 ├── js/app.js                  → Alpine + نرمال‌سازی ارقام ✅ M1
 └── views/
-    ├── layouts/app.blade.php  → شل RTL با سایدبار ✅ M1
+    ├── components/layouts/app.blade.php  → شل RTL با سایدبار (`<x-layouts.app>`) ✅ M1
     ├── components/*           → badge/btn/card/empty/flash/page-head/stat ✅ M1
     └── welcome.blade.php      → صفحهٔ خانه ✅ M1
 public/

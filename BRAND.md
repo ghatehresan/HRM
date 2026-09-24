@@ -80,7 +80,7 @@ Blade components / views                ← مصرف‌کننده
 
 | کامپوننت | فایل | نقش |
 |---|---|---|
-| شل RTL + سایدبار | `layouts/app.blade.php` | سایدبار ۲۵۲px راست، drawer موبایل |
+| شل RTL + سایدبار | `components/layouts/app.blade.php` (`<x-layouts.app>`) | سایدبار ۲۵۲px راست، drawer موبایل |
 | سربرگ صفحه | `components/page-head.blade.php` | تیتر + زیرعنوان + اکشن‌ها |
 | کارت | `components/card.blade.php` | کانتینر استاندارد بخش‌ها |
 | بج وضعیت | `components/badge.blade.php` | ۵px radius، متن ۱۲px بولد (طبق برند) |
